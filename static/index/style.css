@@ -134,9 +134,10 @@ body {
 }
 
 .form-template-box img{
-    width: 10em;
+    width: 7em;
     height: 7em;
     float: left;
+    margin-left: 1.2em;
 }
 
 .form-template-box:hover{

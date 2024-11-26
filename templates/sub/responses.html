@@ -7,25 +7,10 @@
 {% endblock %}
 {% block body %}
 <div class="container-fluid">
-    <!-- <div class="form-topnav">
-        <a href="/">
-            <img src="{% static 'Icon/icon.png' %}" alt="Google Forms Icon(CLONE)" class="navbar-icon form-icon" title="Forms" />
-        </a>
-        <span class="nav-text nav-form-title input-form-title">{{form.title}}</span>
-        <div class="float-right">
-            <img src="{% static 'Icon/theme.png' %}" alt="Theme icon" id="customize-theme-btn" title="Customize theme" class="nav-form-menu-icon" />
-            <a href="{% url 'view_form' form.code %}">
-                <img src="{% static 'Icon/eye.png' %}" alt="Preview icon" title="Preview" class="nav-form-menu-icon big-screen" />
-            </a>
-            <img src="{% static 'Icon/send.png' %}" alt="Send icon" title="Send" class="nav-form-menu-icon small-screen" id="send-form-btn" />
-            <img src="{% static 'Icon/setting.png' %}" alt="Setting icon" title="Setting" class="nav-form-menu-icon open-setting" />
-            <button class="btn send-form-btn big-screen" title="Send" id="send-form-btn">Send</button>
-        </div>
-    </div> -->
     <div class="form-topnav">
         <div class="form-navigation center">
             <span class="col-2 navigation"><a href="{% url 'edit_form' form.code %}" class="link">Edit</a></span>
-            <span class="col-4 navigation"><a href="{% url 'view_form' form.code %}" class="link" />Preview</span>
+            <span class="col-4 navigation"><a href="{% url 'view_form' form.code %}" class="link">Preview</a></span>
             <span class="col-13 navigation active">Responses</span>
         </div>
     </div>
