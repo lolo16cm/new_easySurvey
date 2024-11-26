@@ -434,8 +434,8 @@ def submit_form(request, code):
                 response.save()
         return render(request, "sub/form_response.html", {
             "form": formInfo,
-            "code": code
-        })
+            "code": code,
+            })
     
 def retrieve_checkbox_choices(response, question):
     checkbox_answers = []

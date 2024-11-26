@@ -9,10 +9,32 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# @login_required
+# def login_root_redirect(request):
+#     return redirect('home')
+
 @login_required
 def login_root_redirect(request):
-    return redirect('/')
+    """
+    Redirect users based on their role (creator or taker).
+    """
+    try:
+        # Retrieve the user's profile to check their role
+        profile = Profile.objects.get(user=request.user)
 
+        # Redirect based on the role
+        if profile.role == 'creator':
+            return redirect('home')  # Redirect creators to 'home'
+        elif profile.role == 'taker':
+            return redirect('results')  # Redirect takers to 'results'
+
+        # Fallback in case role is missing or invalid
+        return redirect('403')
+    except Profile.DoesNotExist:
+        # Handle the case where a Profile is not found for the user
+        logout(request)
+        return redirect('404')  # Redirect to the login page or a safe route
+    
 
 def register(request):
     if request.method == 'POST':
@@ -26,41 +48,18 @@ def register(request):
             
             # Log the user in
             login(request, user)
-            return redirect("/")
+            if role == 'creator':
+                return redirect("home")
+            elif role == 'taker':
+                return redirect('results')
     else:
         form = UserForm()
     return render(request, 'easy_survey/register.html', {'form': form})
 
     
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserForm(request.POST)
-#         if form.is_valid():
-#             user=form.save()
-#             login(request, user)
-#             return redirect("/")
-#     else:
-#         form = UserForm
-#     return render(request, 'easy_survey/register.html', {'form': form})
-
-@login_required
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'easy_survey/user_list.html', {'users':users})
-
-def logout_view(request):
-    #Logout the user
-    logout(request)
-    return HttpResponseRedirect(reverse('index'))
 
 
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
-
-
+# def logout_view(request):
+#     #Logout the user
+#     logout(request)
+#     return HttpResponseRedirect(reverse('index'))

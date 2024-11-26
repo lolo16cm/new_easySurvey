@@ -157,7 +157,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #login url
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGOUT_REDIRECT_URL = 'logout'
 
 #make the time in New York
 TIME_ZONE = 'America/New_York'
