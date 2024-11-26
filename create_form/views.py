@@ -12,7 +12,31 @@ from django.contrib.auth.models import User
 # from .forms import AddInventoryForm, UpdateInventoryForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
+
+# def create_form(request):
+#     # Creator must be authenticated
+#     if not request.user.is_authenticated:
+#         return HttpResponseRedirect(reverse("login"))
+#     # Create a blank form API
+#     if request.method == "POST":
+#         data = json.loads(request.body)
+#         title = data["title"]
+#         code = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(15))
+#         choices = Choices(choice = "Option 1")
+#         choices.save()
+#         question = Questions(question_type = "multiple choice", question= "Untitled Question", required= False)
+#         question.save()
+#         question.choices.add(choices)
+#         question.save()
+#         form = Form(code = code, title = title, creator=request.user)
+#         form.save()
+#         form.questions.add(question)
+#         form.save()
+#         return JsonResponse({"message": "Success", "code": code})
+    
+@login_required
 def create_form(request):
     # Creator must be authenticated
     if not request.user.is_authenticated:
