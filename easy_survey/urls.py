@@ -21,7 +21,7 @@ urlpatterns = [
     
     
     
-    path('results', root_view.results, name='results'),
+    path('results/', root_view.results, name='results'),
     
     
     path('create', create_form_view.create_form, name="create_form"),
