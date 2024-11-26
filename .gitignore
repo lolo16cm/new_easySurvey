@@ -10,11 +10,7 @@ db.sqlite3
 *.pot
 *.pyc
 
-# Media and static files
-/media/
-**/media/
-staticfiles/
-**/staticfiles/
+
 
 # Virtual environment
 venv/
