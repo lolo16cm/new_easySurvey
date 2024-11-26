@@ -1,34 +1,27 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from user_auth.views import register,  login_root_redirect
+from user_auth.views import  login_root_redirect
+from results import views as result_view
 from . import views as root_view
 from create_form import views as create_form_view
-from answers import views as answer_view
-from results import views as result_view
-
-from django.contrib import admin
-from django.urls import path, include
-from user_auth.views import login_root_redirect
-from . import views as root_view
-from create_form import views as create_form_view
-from answers import views as answer_view
-from results import views as result_view
 
 
-from django.contrib import admin
-from django.urls import path, include
+
+
 
 
 urlpatterns = [
     path('', login_root_redirect, name='root_redirect'),
-    path('', root_view.index, name='home'),
+    path('home/', root_view.index, name='home'),
     path('admin/', admin.site.urls),
-    path('', include('user_auth.urls')),
+    path('user/', include('user_auth.urls')),
+    path('answers/', include('answers.urls')),
+
     
-    path('index', root_view.index, name='home'),
     
-    path('results/', root_view.results, name='results'),
+    
+    path('results', root_view.results, name='results'),
     
     
     path('create', create_form_view.create_form, name="create_form"),
@@ -58,7 +51,7 @@ urlpatterns = [
     path('<str:code>/viewform', create_form_view.view_form, name="view_form"),
     path('<str:code>/submit', create_form_view.submit_form, name="submit_form"),
     path('<str:code>/responses', result_view.responses, name='responses'),
-    path('<str:code>/response/<str:response_code>', answer_view.response, name="response"),
+    
     path('<str:code>/response/<str:response_code>/edit', create_form_view.edit_response, name="edit_response"),
     path('<str:code>/responses/delete', create_form_view.delete_responses, name="delete_responses"),
     # 404 not found, 403 forbidden
